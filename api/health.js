@@ -1,7 +1,9 @@
-export default function handler(req, res) {
-  res.status(200).json({
+module.exports = function handler(req, res) {
+  res.setHeader("Cache-Control", "no-store");
+  return res.status(200).json({
     ok: true,
     aiConfigured: Boolean(process.env.OPENAI_API_KEY),
     model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+    runtime: "vercel-node-commonjs"
   });
-}
+};

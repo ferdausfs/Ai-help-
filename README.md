@@ -81,3 +81,8 @@ git push -u origin main
 ## Safety
 
 Production-e OpenAI API key frontend/browser-e deben na. Ei app default `/api/chat` backend proxy use kore — key server/hosting environment variable-e thakbe.
+
+
+## Vercel 500 fix note
+
+This version uses CommonJS API functions and explicit `vercel.json` builds/routes so Vercel serves static files as static assets and only `/api/*` as Node serverless functions.

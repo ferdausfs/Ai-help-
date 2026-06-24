@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   try {
     if (req.method !== "POST") {
       res.setHeader("Allow", "POST");
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     if (!apiKey) {
       return res.status(500).json({
         error: "OPENAI_API_KEY is not configured on the server.",
-        hint: "Vercel → Project → Settings → Environment Variables → add OPENAI_API_KEY, then Redeploy.",
+        hint: "Vercel → Project → Settings → Environment Variables → add OPENAI_API_KEY, then Redeploy."
       });
     }
 
@@ -25,20 +25,20 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
         model,
         messages,
-        temperature: typeof body.temperature === "number" ? body.temperature : 0.75,
-      }),
+        temperature: typeof body.temperature === "number" ? body.temperature : 0.75
+      })
     });
 
     const data = await upstream.json().catch(() => ({}));
     if (!upstream.ok) {
       return res.status(upstream.status).json({
-        error: data.error?.message || "OpenAI API request failed",
-        details: data,
+        error: data.error && data.error.message ? data.error.message : "OpenAI API request failed",
+        details: data
       });
     }
 
@@ -46,11 +46,11 @@ export default async function handler(req, res) {
     return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json({
-      error: error?.message || "Server error",
-      hint: "Check Vercel → Deployments → Function Logs for the exact stack trace.",
+      error: error && error.message ? error.message : "Server error",
+      hint: "Check Vercel → Deployments → Function Logs for exact error."
     });
   }
-}
+};
 
 function normalizeBody(body) {
   if (!body) return {};
