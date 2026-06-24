@@ -1,11 +1,10 @@
 {
   "name": "designchat-pwa",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js"
+    "dev": "node local-server.mjs"
   },
   "engines": {
     "node": ">=18"

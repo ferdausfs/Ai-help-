@@ -73,7 +73,7 @@ git push -u origin main
 - `index.html` — PWA UI
 - `styles.css` — design
 - `app.js` — chat + preview logic
-- `server.js` — local backend proxy for OpenAI
+- `local-server.mjs` — local backend proxy for OpenAI
 - `api/chat.js` — Vercel serverless backend proxy
 - `.env.example` — key setup template
 - `manifest.webmanifest` + `sw.js` — Android install/offline support
